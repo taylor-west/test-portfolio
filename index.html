@@ -57,13 +57,28 @@
       margin:0;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color: var(--text);
+      line-height: 1.5;
+      overflow-x:hidden;
+      background: var(--bg); /* keep base color here */
+      position: relative;
+    }
+
+    /* One continuous backdrop that doesn't "repeat" per scroll */
+    body::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+
       background:
         radial-gradient(900px 500px at 12% 10%, rgba(124,92,255,0.35), transparent 60%),
         radial-gradient(900px 500px at 85% 0%, rgba(37,214,255,0.28), transparent 55%),
         radial-gradient(700px 500px at 85% 90%, rgba(46,229,157,0.14), transparent 60%),
         var(--bg);
-      line-height: 1.5;
-      overflow-x:hidden;
+
+      /* optional: prevents odd repaint seams on some GPUs */
+      /* transform: translateZ(0); */
     }
 
     a{ color:inherit; text-decoration:none; }
@@ -82,12 +97,36 @@
 
     .container{ width: min(100%, var(--max)); margin: 0 auto; padding: 0 20px; }
 
-    .header{
+    /* .header{
       position: sticky; top: 0; z-index: 500;
       backdrop-filter: blur(14px);
       background: color-mix(in srgb, var(--bg) 75%, transparent);
       border-bottom: 1px solid var(--border);
+    } */
+
+
+    .header{
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 500;
+      backdrop-filter: blur(14px);
+      background: color-mix(in srgb, var(--bg) 75%, transparent);
+      border-bottom: 1px solid var(--border);
+      transition: transform 180ms ease;
     }
+
+    /* Hidden state (slides header out of view) */
+    .header.is-hidden{
+      transform: translateY(-110%);
+    }
+
+    /* Prevent content from sitting under the fixed header */
+    main{
+      padding-top: 70px; /* adjust if your header height differs */
+    }
+
     .nav{
       display:flex; align-items:center; justify-content:space-between;
       padding: 14px 0;
@@ -449,7 +488,6 @@
       <section id="work">
         <div class="section-title">
           <h2>Work</h2>
-          <p>Selected experience from internships, campus engineering, and research.</p>
         </div>
 
         <div class="panel">
@@ -506,7 +544,6 @@
       <section id="projects">
         <div class="section-title">
           <h2>Projects</h2>
-          <p>Live links pulled from your site + GitHub.</p>
         </div>
 
         <div class="grid">
@@ -583,7 +620,6 @@
       <section id="skills">
         <div class="section-title">
           <h2>Skills</h2>
-          <p>Organized for quick scanning.</p>
         </div>
 
         <div class="grid">
@@ -624,7 +660,6 @@
       <section id="education">
         <div class="section-title">
           <h2>Education</h2>
-          <p>Academic foundation and applied coursework highlights.</p>
         </div>
 
         <div class="panel">
@@ -648,7 +683,6 @@
       <section id="contact">
         <div class="section-title">
           <h2>Contact</h2>
-          <p>Fast paths for recruiters and collaborators.</p>
         </div>
 
         <div class="grid">
@@ -697,7 +731,7 @@
                 <a class="btn" href="https://taylorhwest.com/" target="_blank" rel="noreferrer">Website</a>
                 <a class="btn" href="https://github.com/taylor-west" target="_blank" rel="noreferrer">GitHub</a>
                 <a class="btn" href="https://www.linkedin.com/in/taylor-west-h/" target="_blank" rel="noreferrer">LinkedIn</a>
-                <a class="btn" href="https://taylorhwest.com/files/resume.pdf/" target="_blank" rel="noreferrer">Resume (PDF)</a>
+                <a class="btn" href="https://taylorhwest.com/files/resume.pdf" target="_blank" rel="noreferrer">Resume (PDF)</a>
               </div>
             </div>
           </div>
@@ -707,7 +741,6 @@
       <footer>
         <div class="foot">
           <div>© <span id="year"></span> Taylor West</div>
-          <div class="mono">Built for speed · Accessible · Responsive</div>
         </div>
       </footer>
 
@@ -765,6 +798,40 @@
     });
 
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Hide header on scroll down, show on scroll up
+    (() => {
+      const header = document.querySelector(".header");
+      if (!header) return;
+
+      let lastY = window.scrollY;
+      const threshold = 8;     // ignore tiny scroll jitter
+      const revealY = 80;      // always show near top
+
+      window.addEventListener("scroll", () => {
+        const y = window.scrollY;
+
+        // Always show near the top of the page
+        if (y < revealY) {
+          header.classList.remove("is-hidden");
+          lastY = y;
+          return;
+        }
+
+        const delta = y - lastY;
+        if (Math.abs(delta) < threshold) return;
+
+        if (delta > 0) {
+          // scrolling down
+          header.classList.add("is-hidden");
+        } else {
+          // scrolling up
+          header.classList.remove("is-hidden");
+        }
+
+        lastY = y;
+      }, { passive: true });
+    })();
   </script>
 </body>
 </html>
