@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0B0F1A" />
+  <title>Taylor West — Software Engineer</title>
+  <meta
+    name="description"
+    content="Portfolio of Taylor West — backend + full-stack engineer with experience in Ruby on Rails, PostgreSQL, Android, and data-driven research tooling."
+  />
+
+  <meta property="og:title" content="Taylor West — Portfolio" />
+  <meta property="og:description" content="Backend + full-stack engineering. Rails/Postgres, Android, data-driven tooling." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #070A12;
+      --panel: rgba(255,255,255,0.06);
+      --panel2: rgba(255,255,255,0.085);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.68);
+      --faint: rgba(255,255,255,0.52);
+      --border: rgba(255,255,255,0.12);
+      --shadow: 0 18px 60px rgba(0,0,0,0.55);
+      --accent: #7C5CFF;
+      --accent2: #25D6FF;
+      --good: #2EE59D;
+      --radius: 18px;
+      --radius2: 24px;
+      --max: 1120px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    [data-theme="light"]{
+      --bg: #F6F7FB;
+      --panel: rgba(0,0,0,0.04);
+      --panel2: rgba(0,0,0,0.06);
+      --text: rgba(0,0,0,0.90);
+      --muted: rgba(0,0,0,0.62);
+      --faint: rgba(0,0,0,0.48);
+      --border: rgba(0,0,0,0.12);
+      --shadow: 0 18px 60px rgba(0,0,0,0.12);
+      --accent: #5B3DFF;
+      --accent2: #0077FF;
+      --good: #0FAF6E;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
+      background:
+        radial-gradient(900px 500px at 12% 10%, rgba(124,92,255,0.35), transparent 60%),
+        radial-gradient(900px 500px at 85% 0%, rgba(37,214,255,0.28), transparent 55%),
+        radial-gradient(700px 500px at 85% 90%, rgba(46,229,157,0.14), transparent 60%),
+        var(--bg);
+      line-height: 1.5;
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    button{ font: inherit; }
+
+    .skip{
+      position:absolute; left:-999px; top:12px;
+      padding:10px 12px;
+      background: var(--panel2);
+      border:1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      z-index:1000;
+    }
+    .skip:focus{ left:12px; }
+
+    .container{ width: min(100%, var(--max)); margin: 0 auto; padding: 0 20px; }
+
+    .header{
+      position: sticky; top: 0; z-index: 500;
+      backdrop-filter: blur(14px);
+      background: color-mix(in srgb, var(--bg) 75%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 14px 0;
+      gap: 12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap: 12px;
+      min-width: 220px;
+    }
+    .logo{
+      width: 36px; height: 36px; border-radius: 12px;
+      background:
+        radial-gradient(14px 14px at 30% 30%, rgba(255,255,255,0.55), transparent 60%),
+        linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .brand h1{
+      font-size: 14px; letter-spacing: 0.2px; margin:0;
+      line-height: 1.1;
+    }
+    .brand span{ display:block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    .links{
+      display:flex; align-items:center; gap: 18px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .links a{
+      font-size: 13px;
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 12px;
+    }
+    .links a:hover{
+      color: var(--text);
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 7px 9px;
+    }
+
+    .actions{ display:flex; align-items:center; gap:10px; min-width:220px; justify-content:flex-end; }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .btn:hover{ transform: translateY(-1px); background: var(--panel2); border-color: color-mix(in srgb, var(--border) 80%, white 20%); }
+    .btn:active{ transform: translateY(0px); }
+    .btn.primary{
+      border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+      background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 85%, transparent), color-mix(in srgb, var(--accent2) 70%, transparent));
+      box-shadow: 0 18px 50px rgba(0,0,0,0.25);
+    }
+    .btn .kbd{
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--faint);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 8px;
+      background: color-mix(in srgb, var(--panel2) 70%, transparent);
+    }
+
+    .hero{ padding: 54px 0 28px; }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 22px;
+      align-items:stretch;
+    }
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+    }
+    .hero-main{
+      padding: 26px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-main:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(500px 280px at 20% 20%, rgba(124,92,255,0.25), transparent 55%),
+        radial-gradient(480px 280px at 85% 10%, rgba(37,214,255,0.20), transparent 55%);
+      pointer-events:none;
+    }
+    .hero-main > *{ position:relative; z-index:2; }
+
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:10px;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .dot{
+      width: 10px; height:10px; border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,255,255,0.1));
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+
+    .headline{
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.1;
+      margin: 0 0 12px 0;
+      letter-spacing: -0.02em;
+    }
+    .subhead{
+      font-size: 15px;
+      color: var(--muted);
+      margin: 0 0 18px 0;
+      max-width: 62ch;
+    }
+
+    .hero-cta{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top: 8px;
+    }
+
+    .hero-side{
+      padding: 18px;
+      display:flex;
+      flex-direction:column;
+      gap: 14px;
+    }
+    .quick{
+      padding: 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: color-mix(in srgb, var(--panel2) 70%, transparent);
+    }
+    .quick h3{ margin: 0 0 10px 0; font-size: 13px; color: var(--muted); font-weight: 600; }
+    .quick .row{
+      display:flex; justify-content:space-between; gap:12px;
+      font-size: 13px;
+      padding: 8px 0;
+      border-top: 1px dashed color-mix(in srgb, var(--border) 65%, transparent);
+    }
+    .quick .row:first-of-type{ border-top:none; padding-top: 0; }
+
+    section{ padding: 26px 0; }
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap: 14px;
+      margin: 0 0 14px 0;
+    }
+    .section-title h2{
+      margin: 0;
+      font-size: 16px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .section-title p{
+      margin: 0;
+      font-size: 13px;
+      color: var(--faint);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .col-6{ grid-column: span 6; }
+    .col-4{ grid-column: span 4; }
+    .col-8{ grid-column: span 8; }
+    .col-12{ grid-column: span 12; }
+
+    .panel{
+      padding: 18px;
+      border-radius: var(--radius2);
+      border: 1px solid var(--border);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .timeline{ display:flex; flex-direction:column; gap: 12px; }
+    .role{
+      padding: 16px;
+      border-radius: var(--radius2);
+      border: 1px solid var(--border);
+      background: color-mix(in srgb, var(--panel2) 70%, transparent);
+      position:relative;
+      overflow:hidden;
+    }
+    .role:before{
+      content:"";
+      position:absolute; left:-120px; top:-140px;
+      width: 260px; height: 260px;
+      background: radial-gradient(circle at 30% 30%, rgba(124,92,255,0.18), transparent 60%);
+      transform: rotate(15deg);
+      pointer-events:none;
+    }
+    .role > *{ position:relative; z-index:2; }
+    .role-head{
+      display:flex; align-items:flex-start; justify-content:space-between; gap: 12px;
+      margin-bottom: 10px;
+    }
+    .role h3{ margin: 0; font-size: 15px; }
+    .role .meta{ color: var(--muted); font-size: 12px; margin-top: 2px; }
+    .badge{
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      background: var(--panel);
+      padding: 6px 10px;
+      border-radius: 999px;
+      white-space:nowrap;
+    }
+    .role ul{
+      margin: 0; padding-left: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .role li{ margin: 8px 0; }
+
+    .proj{
+      padding: 16px;
+      border-radius: var(--radius2);
+      border: 1px solid var(--border);
+      background: var(--panel);
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      height: 100%;
+      display:flex; flex-direction:column; gap: 10px;
+    }
+    .proj:hover{ transform: translateY(-2px); background: var(--panel2); border-color: color-mix(in srgb, var(--border) 80%, white 20%); }
+    .proj h3{ margin:0; font-size: 14px; }
+    .proj p{ margin:0; color: var(--muted); font-size: 13px; }
+    .proj .tags{ display:flex; flex-wrap:wrap; gap: 8px; margin-top:auto; }
+    .tag{
+      font-size: 11px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--panel2) 70%, transparent);
+    }
+
+    footer{
+      padding: 28px 0 34px;
+      color: var(--faint);
+      font-size: 12px;
+    }
+    .foot{
+      display:flex; justify-content:space-between; gap: 10px; flex-wrap:wrap;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+    .mono{ font-family: var(--mono); }
+
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .actions, .brand{ min-width: unset; }
+      .links{ display:none; }
+      .grid{ gap: 12px; }
+      .col-6, .col-8, .col-4{ grid-column: span 12; }
+    }
+    @media (prefers-reduced-motion: reduce){
+      *{ scroll-behavior:auto !important; transition:none !important; animation:none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="header">
+    <div class="container">
+      <div class="nav" aria-label="Primary">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <h1>Taylor West</h1>
+            <span>Backend + Full-Stack Engineer</span>
+          </div>
+        </div>
+
+        <nav class="links" aria-label="Site">
+          <a href="#work">Work</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#education">Education</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="actions">
+          <button class="btn" id="themeBtn" type="button" aria-label="Toggle theme">
+            Theme <span class="kbd">T</span>
+          </button>
+          <a class="btn primary" href="#contact">Get in touch</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="container">
+
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-grid">
+          <div class="card hero-main">
+            <div class="eyebrow">
+              <span class="dot" aria-hidden="true"></span>
+              <span>Provo, UT · Open to backend / full-stack roles</span>
+            </div>
+
+            <h2 class="headline">
+              I build reliable systems, clean APIs, and product-focused tooling.
+            </h2>
+            <p class="subhead">
+              Backend-first engineer with hands-on experience in Ruby on Rails + PostgreSQL, CI/CD testing practices,
+              Android/Tizen apps, Azure workflows, and research tooling for data-driven visualization and analysis.
+            </p>
+
+            <div class="hero-cta">
+              <a class="btn primary" href="https://github.com/taylor-west" target="_blank" rel="noreferrer">View GitHub</a>
+              <a class="btn" href="https://www.linkedin.com/in/taylor-west-h/" target="_blank" rel="noreferrer">View LinkedIn</a>
+              <a class="btn" href="https://taylorhwest.com/files/resume.pdf" target="_blank" rel="noreferrer">Download Resume</a>
+              <a class="btn" href="https://taylorhwest.com/" target="_blank" rel="noreferrer">Current Site</a>
+            </div>
+          </div>
+
+          <aside class="card hero-side" aria-label="Quick facts">
+            <div class="quick">
+              <h3>Snapshot</h3>
+              <div class="row"><span>Focus</span><span>Backend + Full-stack</span></div>
+              <div class="row"><span>Strengths</span><span>APIs · Data · Reliability</span></div>
+              <div class="row"><span>Tooling</span><span>Rails · Postgres · Git</span></div>
+            </div>
+
+            <div class="quick">
+              <h3>Contact</h3>
+              <div class="row"><span>Email</span><span class="mono">west.taylor.h@gmail.com</span></div>
+              <div class="row"><span>Website</span><span class="mono">taylorhwest.com</span></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- WORK -->
+      <section id="work">
+        <div class="section-title">
+          <h2>Work</h2>
+          <p>Selected experience from internships, campus engineering, and research.</p>
+        </div>
+
+        <div class="panel">
+          <div class="timeline">
+            <article class="role">
+              <div class="role-head">
+                <div>
+                  <h3>Backend Software Engineering Intern · Pattern</h3>
+                  <div class="meta">Lehi, UT · Aug 2023 – May 2024</div>
+                </div>
+                <div class="badge">Ruby on Rails · PostgreSQL</div>
+              </div>
+              <ul>
+                <li>Designed and implemented support for storing complex corporate relationships in an existing PostgreSQL database managed by Rails.</li>
+                <li>Wrote unit/integration tests (RSpec) and contributed to Swagger documentation within a CI/CD pipeline.</li>
+                <li>Coordinated with PMs and distributed teams to deliver time-sensitive, high-impact tickets.</li>
+              </ul>
+            </article>
+
+            <article class="role">
+              <div class="role-head">
+                <div>
+                  <h3>Software Developer · BYU Dining Technology</h3>
+                  <div class="meta">Provo, UT · Aug 2022 – Apr 2023</div>
+                </div>
+                <div class="badge">Android · Tizen · Azure</div>
+              </div>
+              <ul>
+                <li>Built and deployed in-house apps used by hundreds of faculty and students using Agile practices.</li>
+                <li>Created Tizen and Android digital signage apps that reduced recurring costs for the department.</li>
+                <li>Used Microsoft Azure services to support pipelines and processes for a mobile ordering system.</li>
+              </ul>
+            </article>
+
+            <article class="role">
+              <div class="role-head">
+                <div>
+                  <h3>Research Assistant · Bailey Bioinformatics Lab (BYU)</h3>
+                  <div class="meta">Provo, UT · Jan 2022 – Present</div>
+                </div>
+                <div class="badge">R / Shiny · ML · Linear Algebra</div>
+              </div>
+              <ul>
+                <li>Developed an R Shiny web app to generate and visualize Polygenic Risk Scores from multi-omic oncology data.</li>
+                <li>Built custom transformation pipelines and data-driven tools using ML and linear algebra approaches.</li>
+                <li>Collaborated with external research partners to deliver reproducible analysis tooling.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects">
+        <div class="section-title">
+          <h2>Projects</h2>
+          <p>Live links pulled from your site + GitHub.</p>
+        </div>
+
+        <div class="grid">
+          <div class="col-4">
+            <a class="proj" href="https://github.com/taylor-west/byu_fulfillment_app" target="_blank" rel="noreferrer">
+              <h3>BYU Fulfillment App</h3>
+              <p>Python-based tooling for fulfillment workflows.</p>
+              <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">Automation</span>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-4">
+            <a class="proj" href="https://github.com/taylor-west/bio_465_structure_function" target="_blank" rel="noreferrer">
+              <h3>BIO 465 Structure/Function Capstone</h3>
+              <p>Bioinformatics capstone project work (code + artifacts).</p>
+              <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">Bioinformatics</span>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-4">
+            <a class="proj" href="https://github.com/taylor-west/cs_340_tweeter" target="_blank" rel="noreferrer">
+              <h3>CS 340 Tweeter</h3>
+              <p>Course project focused on scalable backend patterns.</p>
+              <div class="tags">
+                <span class="tag">Java</span>
+                <span class="tag">Backend</span>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-4">
+            <a class="proj" href="https://github.com/taylor-west/vue-lab" target="_blank" rel="noreferrer">
+              <h3>VueMCU (SPA)</h3>
+              <p>Single-page app using Node.js + Vue with dynamic routing and filtering.</p>
+              <div class="tags">
+                <span class="tag">Vue</span>
+                <span class="tag">Node.js</span>
+                <span class="tag">SPA</span>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-4">
+            <a class="proj" href="https://github.com/taylor-west/Personal-Website" target="_blank" rel="noreferrer">
+              <h3>Personal Website (Source)</h3>
+              <p>Source code for your current portfolio site.</p>
+              <div class="tags">
+                <span class="tag">HTML/CSS</span>
+                <span class="tag">Frontend</span>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-4">
+            <a class="proj" href="https://taylorhwest.com/files/resume.pdf" target="_blank" rel="noreferrer">
+              <h3>Resume (PDF)</h3>
+              <p>One-page resume download.</p>
+              <div class="tags">
+                <span class="tag">PDF</span>
+                <span class="tag">Download</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills">
+        <div class="section-title">
+          <h2>Skills</h2>
+          <p>Organized for quick scanning.</p>
+        </div>
+
+        <div class="grid">
+          <div class="col-6">
+            <div class="panel">
+              <h3 style="margin:0 0 10px 0; font-size:14px;">Backend & Data</h3>
+              <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                <span class="tag">Ruby on Rails</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">MySQL</span>
+                <span class="tag">SQLite</span>
+                <span class="tag">MongoDB</span>
+                <span class="tag">AWS SNS/SQS</span>
+                <span class="tag">Terraform</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="panel">
+              <h3 style="margin:0 0 10px 0; font-size:14px;">Languages & Tooling</h3>
+              <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                <span class="tag">Python</span>
+                <span class="tag">Java</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">Git</span>
+                <span class="tag">Linux</span>
+                <span class="tag">Android Studio</span>
+                <span class="tag">IntelliJ</span>
+                <span class="tag">VS Code</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EDUCATION -->
+      <section id="education">
+        <div class="section-title">
+          <h2>Education</h2>
+          <p>Academic foundation and applied coursework highlights.</p>
+        </div>
+
+        <div class="panel">
+          <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+            <div>
+              <h3 style="margin:0; font-size:15px;">Brigham Young University — B.S. Bioinformatics</h3>
+              <div style="color:var(--muted); font-size:13px; margin-top:4px;">Aug 2019 – Apr 2024 · GPA 3.7/4.0 · Phi Eta Sigma</div>
+            </div>
+            <div class="badge">Full-stack · Algorithms · Databases</div>
+          </div>
+
+          <ul style="margin:12px 0 0; padding-left:18px; color:var(--muted); font-size:13px;">
+            <li>Built full-stack Android apps with SQL-backed services and custom Web APIs.</li>
+            <li>Implemented performance-sensitive algorithms (DP, greedy, divide-and-conquer).</li>
+            <li>Developed web apps with Node/Express/Vue and SQL + NoSQL databases; deployed on Linux VMs.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <div class="section-title">
+          <h2>Contact</h2>
+          <p>Fast paths for recruiters and collaborators.</p>
+        </div>
+
+        <div class="grid">
+          <div class="col-8">
+            <div class="panel">
+              <h3 style="margin:0 0 10px 0; font-size:14px;">Message</h3>
+              <p style="margin:0 0 14px 0; color:var(--muted); font-size:13px;">
+                Use the buttons on the right, or wire this form to Formspree / Netlify Forms.
+              </p>
+
+              <form onsubmit="return false;" aria-label="Contact form" style="display:grid; gap:10px;">
+                <label style="display:grid; gap:6px; font-size:12px; color:var(--muted);">
+                  Name
+                  <input required
+                    style="padding:12px 12px;border-radius:14px;border:1px solid var(--border);background:color-mix(in srgb, var(--panel2) 70%, transparent);color:var(--text);outline:none;"
+                    placeholder="Your name" />
+                </label>
+
+                <label style="display:grid; gap:6px; font-size:12px; color:var(--muted);">
+                  Email
+                  <input required type="email"
+                    style="padding:12px 12px;border-radius:14px;border:1px solid var(--border);background:color-mix(in srgb, var(--panel2) 70%, transparent);color:var(--text);outline:none;"
+                    placeholder="you@company.com" />
+                </label>
+
+                <label style="display:grid; gap:6px; font-size:12px; color:var(--muted);">
+                  What are you building?
+                  <textarea required rows="4"
+                    style="padding:12px 12px;border-radius:14px;border:1px solid var(--border);background:color-mix(in srgb, var(--panel2) 70%, transparent);color:var(--text);outline:none;resize:vertical;"
+                    placeholder="A quick note..."></textarea>
+                </label>
+
+                <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+                  <button class="btn primary" type="button" id="copyEmailBtn">Copy email</button>
+                  <span style="color:var(--faint); font-size:12px;" id="copyStatus" aria-live="polite"></span>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="panel">
+              <h3 style="margin:0 0 10px 0; font-size:14px;">Links</h3>
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                <a class="btn" href="mailto:west.taylor.h@gmail.com">Email</a>
+                <a class="btn" href="https://taylorhwest.com/" target="_blank" rel="noreferrer">Website</a>
+                <a class="btn" href="https://github.com/taylor-west" target="_blank" rel="noreferrer">GitHub</a>
+                <a class="btn" href="https://www.linkedin.com/in/taylor-west-h/" target="_blank" rel="noreferrer">LinkedIn</a>
+              </div>
+
+              <div style="margin-top:14px; color:var(--muted); font-size:12px;">
+                Resume: <a href="https://taylorhwest.com/files/resume.pdf" target="_blank" rel="noreferrer" style="text-decoration:underline;">PDF</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="foot">
+          <div>© <span id="year"></span> Taylor West</div>
+          <div class="mono">Built for speed · Accessible · Responsive</div>
+        </div>
+      </footer>
+
+    </div>
+  </main>
+
+  <script>
+    document.documentElement.style.scrollBehavior = "smooth";
+
+    const root = document.documentElement;
+    const themeBtn = document.getElementById("themeBtn");
+
+    function setTheme(next){
+      root.setAttribute("data-theme", next);
+      localStorage.setItem("theme", next);
+      themeBtn.textContent = "Theme";
+      const kbd = document.createElement("span");
+      kbd.className = "kbd";
+      kbd.textContent = "T";
+      themeBtn.appendChild(document.createTextNode(" "));
+      themeBtn.appendChild(kbd);
+    }
+
+    const saved = localStorage.getItem("theme");
+    if(saved){
+      setTheme(saved);
+    } else {
+      const prefersLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+      setTheme(prefersLight ? "light" : "dark");
+    }
+
+    themeBtn.addEventListener("click", () => {
+      const current = root.getAttribute("data-theme") || "dark";
+      setTheme(current === "dark" ? "light" : "dark");
+    });
+
+    window.addEventListener("keydown", (e) => {
+      const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
+      if(tag === "input" || tag === "textarea") return;
+      if(e.key.toLowerCase() === "t") themeBtn.click();
+    });
+
+    const email = "west.taylor.h@gmail.com";
+    const copyBtn = document.getElementById("copyEmailBtn");
+    const status = document.getElementById("copyStatus");
+    copyBtn.addEventListener("click", async () => {
+      try{
+        await navigator.clipboard.writeText(email);
+        status.textContent = "Copied.";
+        setTimeout(() => status.textContent = "", 1800);
+      }catch(err){
+        status.textContent = "Copy failed — use the Email button instead.";
+        setTimeout(() => status.textContent = "", 2500);
+      }
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
